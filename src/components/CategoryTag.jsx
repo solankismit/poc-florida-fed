@@ -14,7 +14,8 @@ function CategoryTag() {
           throw new Error('Network error fetching categories!');
         }
         const data = await response.json();
-        setCategories(data.categories); // Assuming categories are in 'data' key
+        // Concat "ALL" in categories array
+        setCategories(['All', ...data.categories]);
       } catch (err) {
         console.error("Error fetching categories:", err);
         // Handle error (e.g., display an error message)
@@ -36,7 +37,7 @@ function CategoryTag() {
       {categories.map(category => (
         <button 
           key={category} 
-          onClick={() => handleCategoryClick(category)}
+          onClick={() => category === "All" ?handleCategoryClick(null) : handleCategoryClick(category)}
           className={activeCategory === category ? 'active' : ''}
         >
           {category}
