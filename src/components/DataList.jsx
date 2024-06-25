@@ -11,18 +11,21 @@ function DataList() {
   const [currentSearchTerm, setCurrentSearchTerm] = useState('');
   const [currentCategory, setCurrentCategory] = useState(null);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
 
   const fetchData = async () => {
     setIsLoading(true);
     setError(null);
-    console.log("STARTED")
     
     try {
         // Construct API URL based on current state from events
         console.log(currentSearchTerm,"currentSearchTerm")
         let apiUrl = `https://poc-midflorida.onrender.com/data?search=${currentSearchTerm}`;
         console.log("STARTED API",apiUrl)
+        if(currentPage){
+            apiUrl += `&p=${currentPage}`;
+        }
         if (currentCategory) {
             apiUrl += `&category=${currentCategory}`;
           }
@@ -39,6 +42,7 @@ function DataList() {
       }
       const data = await response.json();
       setFilteredData(data.data);
+      EventBus.emit('paginationData', { pages: data.pages }); 
   } catch (err) {
       setError(err.message);
   } finally {
@@ -47,11 +51,14 @@ function DataList() {
 };
 useEffect(()=>{
   fetchData();
-},[currentSearchTerm,currentCategory,currentFilters])
+},[currentSearchTerm,currentCategory,currentFilters,currentPage])
   useEffect(() => {
 
+
+    const handlePageChange = (newPage) => {
+      setCurrentPage(newPage);
+    };
 const handleSearchUpdate = (newSearchTerm) => { 
-  console.log("SEARCH",newSearchTerm)
     setCurrentSearchTerm(newSearchTerm);
   
 };
@@ -69,6 +76,7 @@ const handleFiltersUpdate = (newFilters) => {
 // Listen for events
 EventBus.on('searchUpdated', handleSearchUpdate);
 EventBus.on('categoryUpdated', handleCategoryUpdate);
+EventBus.on('pageChanged', handlePageChange);
 EventBus
 .on('filtersUpdated', handleFiltersUpdate);
 
@@ -76,6 +84,8 @@ EventBus
    fetchData();
    
    return () => {
+    // Clean up event listeners on component unmount
+    EventBus.off('pageChanged', handlePageChange);
        EventBus.off('searchUpdated', handleSearchUpdate);
        EventBus.off('categoryUpdated', handleCategoryUpdate);
        EventBus.off('filtersUpdated', handleFiltersUpdate);

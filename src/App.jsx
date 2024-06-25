@@ -4,6 +4,7 @@ import SearchBar from './components/SearchBar';
 import CategoryTag from './components/CategoryTag';
 import FilterSidebar from './components/FilterSidebar';
 import DataList from './components/DataList';
+import Pagination from './components/Pagination';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
         <div className="data-list">
           <DataList />
+          <Pagination/>
         </div>
       </div>
     </div>

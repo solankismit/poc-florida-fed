@@ -154,3 +154,42 @@ li {
   margin-bottom: 10px;
   border-radius: 5px;    /* Optional: Adds rounded corners */
 }
+
+/* Pagination.css */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  justify-content: center; /* Center the pagination */
+}
+
+.pagination li {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  margin: 0 5px
+; /* Adjust spacing between items */
+  cursor: pointer;
+  border-radius: 5px; /* Add rounded corners */
+}
+
+.pagination li:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}
+
+.pagination li.active {
+  background-color: #007bff; /* Style the active page */
+  color: white;
+  border-color: #007bff; 
+}
+
+.pagination li:first-child {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+}
+
+.pagination li:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
