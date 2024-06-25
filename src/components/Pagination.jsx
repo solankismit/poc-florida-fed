@@ -18,12 +18,21 @@ const Pagination = () => {
 
     // Listen for pagination data from API response
     EventBus.on('paginationData', handlePaginationData);
-
+    // Listen for events
+    EventBus.on('searchUpdated', resetPage);
+    EventBus.on('categoryUpdated', resetPage);
+    EventBus.on('filtersUpdated', resetPage);
     return () => {
+        EventBus.off('searchUpdated', resetPage);
+        EventBus.off('categoryUpdated', resetPage);
+        EventBus.off('filtersUpdated', resetPage);
       EventBus.off('paginationData', handlePaginationData);
     };
   }, []);
 
+  const resetPage = () => {
+    handlePageChange(1)
+  };
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
 
