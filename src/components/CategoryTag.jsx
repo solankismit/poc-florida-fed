@@ -30,15 +30,13 @@ function CategoryTag() {
     EventBus.emit('categoryUpdated', category);
   };
 
-  // ... (rest of the component remains the same)
-
   return (
-    <div>
+    <div className='CategoryTag'>
       {categories.map(category => (
         <button 
           key={category} 
           onClick={() => category === "All" ?handleCategoryClick(null) : handleCategoryClick(category)}
-          className={activeCategory === category ? 'active' : ''}
+          className={activeCategory == null? (category === "All" ? 'active' :''): (activeCategory === category ? 'active' : '')}
         >
           {category}
         </button>

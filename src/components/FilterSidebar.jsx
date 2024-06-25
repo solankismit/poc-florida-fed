@@ -41,7 +41,7 @@ function FilterSidebar() {
   };
 
   return (
-    <div>
+    <div className='FilterSidebar'>
     <h3>Filters:</h3> 
     {availableFilters.map(filter => (
       <label key={filter}>

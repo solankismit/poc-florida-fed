@@ -54,22 +54,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
-
-css
 /* General Styling */
+.SearchBar{
+  margin-bottom: 20px;
+}
 .SearchBar input {
   padding: 10px;
   border: 1px solid #ccc;
@@ -78,7 +67,7 @@ css
 }
 
 .CategoryTag button {
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   border: 1px solid #ccc;
   padding: 8px 12px;
   margin-right: 5px;
@@ -90,11 +79,19 @@ css
   background-color: #007bff; /* Example active color */
   color: white;
 }
-
+.content-wrapper{
+  display:flex;
+  justify-content: space-between;
+}
+.filter-sidebar {
+  width: 200px;
+  margin-right: 20px;
+}
 .FilterSidebar {
   border: 1px solid #ccc;
   padding: 15px;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  text-align: left;
 }
 
 .FilterSidebar h3 {
@@ -131,7 +128,6 @@ css
 .DataList .error {
   color: red;
 }
-/* In your src/index.css or a separate component-specific CSS file */
 .data-item {
   border: 1px solid #ccc;
   padding: 15px;

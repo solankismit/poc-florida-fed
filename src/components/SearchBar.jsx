@@ -12,7 +12,7 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className='SearchBar'>
       <input 
         type="text" 
         placeholder="Search..." 
